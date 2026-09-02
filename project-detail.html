@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>项目档案 · SHAO.KX</title>
+    <meta
+      name="description"
+      content="邵柯翔的项目档案详情：中医学习网、情侣小程序、RuiVision 电商工作台与更多 AI 实践。"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f1e8d7;
+        --paper2: #e6d5bb;
+        --ink: #26382c;
+        --muted: #697268;
+        --moss: #416447;
+        --terracotta: #c56e4e;
+        --line: rgba(38, 56, 44, 0.18);
+        --card: rgba(255, 251, 243, 0.72);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        background: var(--paper);
+      }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(
+            circle at 85% -10%,
+            rgba(197, 110, 78, 0.22),
+            transparent 34%
+          ),
+          var(--paper);
+        color: var(--ink);
+        font-family: Manrope, "Microsoft YaHei", sans-serif;
+        line-height: 1.7;
+      }
+      .shell {
+        width: min(1080px, calc(100% - 38px));
+        margin: auto;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 82px;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        font-size: 13px;
+      }
+      .brand span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--terracotta);
+        border-radius: 50%;
+        margin-right: 9px;
+      }
+      .back {
+        font:
+          11px "DM Mono",
+          monospace;
+        color: var(--moss);
+      }
+      .back:hover {
+        text-decoration: underline;
+      }
+      .hero {
+        padding: 86px 0 70px;
+        max-width: 830px;
+      }
+      .eyebrow {
+        font:
+          500 11px "DM Mono",
+          monospace;
+        letter-spacing: 0.13em;
+        color: var(--terracotta);
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        font:
+          600 clamp(2.9rem, 7vw, 6.7rem)/1.04 "Noto Serif SC",
+          serif;
+        letter-spacing: -0.07em;
+        margin: 18px 0;
+      }
+      .hero p {
+        max-width: 640px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .hero .meta {
+        color: var(--moss);
+        font:
+          11px "DM Mono",
+          monospace;
+      }
+      .detail {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 48px;
+        padding: 45px 0 75px;
+        border-top: 1px solid var(--line);
+      }
+      .detail h2,
+      .legacy h2 {
+        font:
+          600 clamp(1.8rem, 3vw, 3rem)/1.15 "Noto Serif SC",
+          serif;
+        letter-spacing: -0.05em;
+        margin: 0 0 19px;
+      }
+      .detail h3 {
+        font-size: 15px;
+        margin: 28px 0 8px;
+      }
+      .detail p,
+      .detail li {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .detail ul {
+        padding-left: 18px;
+      }
+      .aside {
+        border: 1px solid var(--line);
+        background: var(--card);
+        padding: 24px;
+        height: max-content;
+        position: sticky;
+        top: 25px;
+      }
+      .aside .label {
+        font:
+          10px "DM Mono",
+          monospace;
+        color: var(--moss);
+      }
+      .aside h3 {
+        font-size: 18px;
+        margin: 7px 0 22px;
+      }
+      .aside dl {
+        margin: 0;
+      }
+      .aside dt {
+        font:
+          10px "DM Mono",
+          monospace;
+        color: var(--terracotta);
+        margin-top: 13px;
+      }
+      .aside dd {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 2px 0 0;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 26px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 10px 14px;
+        border: 1px solid var(--moss);
+        border-radius: 999px;
+        color: var(--moss);
+        font-size: 11px;
+        font-weight: 700;
+        transition: 0.25s ease;
+      }
+      .btn.primary {
+        background: var(--moss);
+        color: #fff;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(65, 100, 71, 0.15);
+      }
+      .legacy {
+        padding: 70px 0;
+        border-top: 1px solid var(--line);
+      }
+      .legacy-intro {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: -7px;
+      }
+      .legacy-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 13px;
+        margin-top: 30px;
+      }
+      .legacy-card {
+        padding: 20px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        min-height: 210px;
+        transition: 0.25s ease;
+      }
+      .legacy-card:nth-child(2n) {
+        border-radius: 25px 8px 25px 8px;
+      }
+      .legacy-card:nth-child(2n + 1) {
+        border-radius: 8px 25px 8px 25px;
+      }
+      .legacy-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--terracotta);
+      }
+      .legacy-card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+      .legacy-card .role {
+        font:
+          10px "DM Mono",
+          monospace;
+        color: var(--terracotta);
+      }
+      .legacy-card p {
+        color: var(--muted);
+        font-size: 12px;
+        margin: 18px 0 0;
+      }
+      .legacy-card .result {
+        color: var(--moss);
+        font-size: 11px;
+        margin-top: 9px;
+      }
+      .foot {
+        padding: 35px 0 55px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        color: var(--muted);
+        font:
+          10px "DM Mono",
+          monospace;
+      }
+      @media (max-width: 780px) {
+        .detail {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        .aside {
+          position: static;
+        }
+        .legacy-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .shell {
+          width: min(100% - 28px, 1080px);
+        }
+        header {
+          height: 68px;
+        }
+        .hero {
+          padding: 58px 0 50px;
+        }
+        .hero h1 {
+          font-size: 3.1rem;
+        }
+        .legacy-grid {
+          grid-template-columns: 1fr;
+        }
+        .foot {
+          display: block;
+        }
+        .foot span + span {
+          display: block;
+          margin-top: 8px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a href="index.html" class="brand"
+          ><span></span>SHAO.KX / PROJECT ARCHIVE</a
+        ><a class="back" href="index.html#projects">← 返回项目列表</a>
+      </header>
+      <main id="detailRoot"></main>
+      <section class="legacy">
+        <div class="eyebrow">PROJECT EXPERIENCE</div>
+        <h2>你之前的项目经历卡片</h2>
+        <p class="legacy-intro">项目经历与业务结果速览。</p>
+        <div class="legacy-grid">
+          <article class="legacy-card">
+            <h3>美团校园送项目</h3>
+            <div class="role">幕府校区负责人</div>
+            <p>统筹建立标准化体系，实现单量突破与稳定运营。</p>
+          </article>
+          <article class="legacy-card">
+            <h3>小红书转化项目</h3>
+            <div class="role">获客转化负责人</div>
+            <p>管理矩阵账号获取1000条线索，达成6万元成交额。</p>
+            <div class="result">🏆 2026年3月21日新成交一个12万元订单</div>
+          </article>
+          <article class="legacy-card">
+            <h3>跨境电商优化</h3>
+            <div class="role">AI自动化应用</div>
+            <p>重构商品上架流程，将4人工作量压缩至1人4小时。</p>
+          </article>
+          <article class="legacy-card">
+            <h3>宠物医药推广</h3>
+            <div class="role">渠道维护</div>
+            <p>对接周边宠物医院，协助整理信息并完成推广活动。</p>
+          </article>
+        </div>
+      </section>
+      <footer class="foot">
+        <span>SHAO.KX / PROJECT ARCHIVE</span
+        ><span>BACKGROUND · PROCESS · DELIVERY</span>
+      </footer>
+    </div>
+    <script>
+      const projects = {
+        tcm: {
+          eyebrow: "00 / LATEST · KNOWLEDGE SYSTEM",
+          title: "中医学习网",
+          meta: "资料驱动的中医学习与复习系统",
+          intro:
+            "把经典资料、来源引用、学习路径与视频发现整合成一个可持续复习的知识产品。重点不是“让 AI 替你下结论”，而是让学习者看见来源、理解边界、留下自己的复盘。",
+          focus: [
+            "资料与书目实体化：围绕书籍、章节和条目组织内容。",
+            "证据链与引用：回答关联来源，保留可追溯的学习上下文。",
+            "视频发现与学习状态：Mock-first，可替换为合规的官方检索服务。",
+          ],
+          stack: "React · TypeScript · Vite · 本地资料库 · 可替换 Provider",
+          cta: "查看项目摘要",
+          href: "",
+          note: "教育用途：不提供未经审核的诊断、处方或剂量建议。",
+        },
+        couple: {
+          eyebrow: "00 / LATEST · WECHAT MINI PROGRAM",
+          title: "小鱼小邵 · 情侣微信小程序",
+          meta: "原生微信小程序与 Cloud Development",
+          intro:
+            "为两个人设计的私密空间，把日历、相册、纪念内容和分享体验放进轻量的微信原生交互里。这个项目让我持续练习状态同步、登录边界、真机预览和分享场景。",
+          focus: [
+            "原生 WXML / WXSS / JavaScript 与 Cloud Development。",
+            "情侣空间、周期日历、相册与分享海报等内容模块。",
+            "登录、成员关系和审核边界：不把审核账号写入真实情侣成员。",
+          ],
+          stack: "微信小程序 · Cloud Development · Miniprogram Automator",
+          cta: "查看项目摘要",
+          href: "",
+          note: "需要使用微信开发者工具或已部署的小程序入口体验。",
+        },
+        ruivision: {
+          eyebrow: "00 / LATEST · DESKTOP WORKBENCH",
+          title: "RuiVision 电商工作台",
+          meta: "从参考图库到生成交付的电商创作工作台",
+          intro:
+            "围绕商品图片、提示词、主图/详情图隔离和浏览器插件协作，把一次性的素材处理变成可重复、可验证的生产链路。",
+          focus: [
+            "内置参考图库与分类索引，支持按场景快速选择素材。",
+            "主图、详情图与 SKU 结果隔离，避免不同工作区互相污染。",
+            "RuiVision 网关、桌面端与插件协作，保留版本、哈希和打包证据。",
+          ],
+          stack:
+            "Electron · React · TypeScript · Python · 浏览器扩展 · Gateway",
+          cta: "查看项目摘要",
+          href: "",
+          note: "项目源代码与发布物保存在本地工作区，公开演示地址可按需提供。",
+        },
+        plugin: {
+          eyebrow: "00 / LATEST · BROWSER EXTENSION",
+          title: "1688 选品与采集插件",
+          meta: "浏览器扩展 × RuiVision 主应用",
+          intro:
+            "把浏览器里的商品研究动作接回桌面工作台，让选品、字段检索、素材回传和后续生成拥有同一条上下文。",
+          focus: [
+            "统一搜索与商品字段，减少复制粘贴和重复录入。",
+            "沿用外部浏览器采集边界，保持数据来源与用户控制。",
+            "与 RuiVision 主应用共享素材和提示词工作流。",
+          ],
+          stack: "Chrome / Edge Extension · JavaScript · RuiVision API",
+          cta: "查看项目摘要",
+          href: "",
+          note: "未提供公开线上地址；如需展示，可补充插件商店或演示视频链接。",
+        },
+        redwood: {
+          eyebrow: "00 / LATEST · 3D SHOWCASE",
+          title: "红木 3D 产品展示网站",
+          meta: "材质、空间与交互展示的产品网站",
+          intro:
+            "以红木产品的材质质感和空间关系为核心，探索 3D 视觉、产品叙事与网页交互如何共同完成一次展示。",
+          focus: [
+            "用 3D 视角建立产品与空间的第一印象。",
+            "把材质、结构和产品信息放在清楚的阅读层级里。",
+            "从 AI 辅助构思到网页呈现，保留可继续迭代的组件结构。",
+          ],
+          stack: "3D Web · 产品视觉 · AI 辅助设计",
+          cta: "查看 GitHub 源码",
+          href: "https://github.com/kexiang335-ship-it/Redwood-Craft-3D",
+          note: "线上展示可继续补充，当前提供 GitHub 源码入口。",
+        },
+      };
+      const key = location.hash.replace("#", "") || "tcm";
+      const data = projects[key] || projects.tcm;
+      const root = document.getElementById("detailRoot");
+      root.innerHTML = `<section class="hero"><div class="eyebrow">${data.eyebrow}</div><h1>${data.title}</h1><p class="meta">${data.meta}</p><p>${data.intro}</p><div class="actions"><a class="btn primary" href="${data.href || "index.html#projects"}" ${data.href ? 'target="_blank" rel="noopener"' : ""}>${data.cta} ↗</a><a class="btn" href="index.html#projects">回到全部项目</a></div></section><section class="detail"><div><h2>我在这里解决了什么</h2><ul>${data.focus.map((item) => `<li>${item}</li>`).join("")}</ul><h3>技术与工作方式</h3><p>${data.stack}</p><h3>边界说明</h3><p>${data.note}</p></div><aside class="aside"><div class="label">PROJECT PROFILE</div><h3>${data.title}</h3><dl><dt>TYPE</dt><dd>${data.meta}</dd><dt>STATUS</dt><dd>${data.cta}</dd><dt>OWNER</dt><dd>邵柯翔 · 项目负责人</dd></dl></aside></section>`;
+    </script>
+  </body>
+</html>

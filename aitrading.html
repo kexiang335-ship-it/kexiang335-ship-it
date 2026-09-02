@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHAO.KX | 全链路外贸 AI Agent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        body { background: #080808; color: #d4af37; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .logic-panel { background: rgba(15, 15, 15, 0.98); border: 1px solid #333; border-radius: 16px; transition: 0.3s; }
+        .logic-panel:hover { border-color: #d4af37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+        .terminal-font { font-family: 'JetBrains Mono', monospace; }
+        input, select { background: #000 !important; color: #fff !important; border: 1px solid #444 !important; padding: 12px; border-radius: 8px; width: 100%; outline: none; font-size: 14px; }
+        .btn-gold { background: #d4af37; color: #000; font-weight: 800; padding: 14px; border-radius: 10px; width: 100%; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .btn-gold:hover:not(:disabled) { background: #fff; transform: scale(1.02); }
+        .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; }
+        .cursor-blink::after { content: '█'; animation: blink 1s step-end infinite; color: #d4af37; margin-left: 4px; }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body class="p-4 md:p-10 relative">
+
+    <div class="max-w-7xl mx-auto mt-8">
+        <header class="mb-10 flex justify-between items-end border-b border-white/10 pb-6">
+            <div>
+                <h1 class="text-4xl font-black italic text-white">SHAO.KX <span class="text-[#d4af37]">AGENT</span></h1>
+                <p class="text-[10px] text-slate-500 uppercase tracking-[0.3em] mt-2">2026 中国外贸经营数字化操作系统</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4 space-y-6">
+                <div class="logic-panel p-6">
+                    <h3 class="text-[11px] font-black text-white mb-6 uppercase flex items-center gap-2">
+                        <span class="w-2 h-2 bg-[#d4af37] rounded-full"></span> 经营参数输入
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="text-[10px] text-slate-500 mb-2 block font-bold">1. 核心产品线</label>
+                            <input type="text" id="prod-input" placeholder="例如：激光切割机">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-slate-500 mb-2 block font-bold">2. 战略目标区域</label>
+                            <select id="region-input">
+                                <option>德国/欧洲市场</option>
+                                <option>沙特/中东市场</option>
+                                <option>美国/北美市场</option>
+                                <option>越南/东南亚市场</option>
+                            </select>
+                        </div>
+                        <button onclick="executeAgent()" id="exec-btn" class="btn-gold">启动 AI 深度生成报告</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="logic-panel min-h-[650px] flex flex-col relative overflow-hidden">
+                    <div id="terminal-screen" class="p-8 flex-1 overflow-y-auto terminal-font text-sm leading-relaxed">
+                        <div id="init-screen" class="h-full flex flex-col items-center justify-center opacity-20 text-[10px] tracking-[0.8em]">SYSTEM READY_</div>
+                        <div id="output-area" class="hidden">
+                            <div id="thought-process" class="text-[11px] text-slate-600 mb-8 space-y-1.5 border-l border-white/10 pl-4 italic"></div>
+                            <div id="report-output" class="text-slate-200 leading-[1.8] whitespace-pre-wrap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成报告逻辑：已移除所有鉴权和体验码逻辑，直接调用 API
+        async function executeAgent() {
+            const prod = document.getElementById('prod-input').value || "通用工业品";
+            const region = document.getElementById('region-input').value;
+            
+            const btn = document.getElementById('exec-btn');
+            const terminal = document.getElementById('terminal-screen');
+            const reportOutput = document.getElementById('report-output');
+            const thoughtDiv = document.getElementById('thought-process');
+
+            btn.disabled = true;
+            btn.innerText = "正在分析中...";
+            document.getElementById('init-screen').classList.add('hidden');
+            document.getElementById('output-area').classList.remove('hidden');
+            reportOutput.innerHTML = "";
+            thoughtDiv.innerHTML = "> [SYSTEM] 建立连接中...<br>> [SYSTEM] 参数解析完毕，开始生成策略...<br>";
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        // 不再传递 code 参数
+                        messages: [{ role: "user", parts: [{ text: `你是一个资深外贸顾问。针对产品"${prod}"，在"${region}"市场，请生成一份报告。包含：1.市场逻辑（结合2026趋势） 2.目标客户类型 3.一份专业英文开发信。要求：格式精美，多用换行。` }] }]
+                    })
+                });
+
+                const data = await response.json();
+                
+                // 简单的容错处理
+                if (data.error) {
+                    reportOutput.innerHTML = `<span class="text-red-500">❌ 生成失败：${data.error}</span>`;
+                    btn.disabled = false;
+                    btn.innerText = "重新启动生成";
+                    return;
+                }
+
+                const text = data.answer || "未获取到有效回答，请重试。";
+                reportOutput.classList.add('cursor-blink');
+
+                let i = 0;
+                const timer = setInterval(() => {
+                    if (i < text.length) {
+                        reportOutput.innerHTML += text.charAt(i);
+                        i++;
+                        terminal.scrollTop = terminal.scrollHeight;
+                    } else {
+                        clearInterval(timer);
+                        reportOutput.classList.remove('cursor-blink');
+                        btn.disabled = false;
+                        btn.innerText = "重新启动生成";
+                    }
+                }, 15);
+
+            } catch (error) {
+                reportOutput.innerHTML = "系统连接错误，请检查网络后重试。";
+                btn.disabled = false;
+                btn.innerText = "重试";
+            }
+        }
+    </script>
+</body>
+</html>

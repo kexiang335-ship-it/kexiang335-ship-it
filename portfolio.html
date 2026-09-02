@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>作品集仓库 · SHAO.KX</title>
+    <meta
+      name="description"
+      content="邵柯翔精选作品集：AI、知识产品、微信小程序与 RuiVision 项目。"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif+SC:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f1e8d7;
+        --ink: #26382c;
+        --muted: #697268;
+        --moss: #416447;
+        --terra: #c56e4e;
+        --line: rgba(38, 56, 44, 0.18);
+        --card: rgba(255, 251, 243, 0.75);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(
+            circle at 8% 0,
+            rgba(65, 100, 71, 0.16),
+            transparent 36%
+          ),
+          var(--paper);
+        color: var(--ink);
+        font-family: Manrope, "Microsoft YaHei", sans-serif;
+        line-height: 1.7;
+      }
+      .shell {
+        width: min(1120px, calc(100% - 38px));
+        margin: auto;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 82px;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+      }
+      .brand i {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--terra);
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+      .back {
+        font:
+          11px "DM Mono",
+          monospace;
+        color: var(--moss);
+      }
+      .back:hover {
+        text-decoration: underline;
+      }
+      .hero {
+        padding: 90px 0 62px;
+        max-width: 850px;
+      }
+      .eyebrow {
+        color: var(--terra);
+        font:
+          11px "DM Mono",
+          monospace;
+        letter-spacing: 0.14em;
+      }
+      .hero h1 {
+        font:
+          600 clamp(3rem, 7vw, 6.5rem)/1.05 "Noto Serif SC",
+          serif;
+        letter-spacing: -0.07em;
+        margin: 17px 0;
+      }
+      .hero p {
+        max-width: 610px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .hero .note {
+        font:
+          11px "DM Mono",
+          monospace;
+        color: var(--moss);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        padding-bottom: 92px;
+      }
+      .card-shot {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 13px;
+        margin: 16px 0 3px;
+        filter: saturate(0.8);
+        border: 1px solid var(--line);
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        min-height: 310px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        transition: 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .card:after {
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        right: -85px;
+        top: -90px;
+        background: rgba(197, 110, 78, 0.12);
+        transition: 0.35s ease;
+      }
+      .card:hover {
+        transform: translateY(-6px) rotate(-0.25deg);
+        border-color: var(--terra);
+        box-shadow: 0 18px 38px rgba(52, 65, 51, 0.13);
+      }
+      .card:hover:after {
+        transform: scale(1.4);
+      }
+      .card .num {
+        position: relative;
+        z-index: 1;
+        font:
+          11px "DM Mono",
+          monospace;
+        color: var(--terra);
+      }
+      .card h2 {
+        position: relative;
+        z-index: 1;
+        margin: 30px 0 9px;
+        font:
+          600 22px/1.2 "Noto Serif SC",
+          serif;
+        letter-spacing: -0.04em;
+      }
+      .card p {
+        position: relative;
+        z-index: 1;
+        color: var(--muted);
+        font-size: 12px;
+        margin: 0;
+      }
+      .card .tags {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 18px;
+      }
+      .tags span {
+        padding: 4px 8px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--moss);
+        font-size: 10px;
+      }
+      .card a {
+        position: relative;
+        z-index: 1;
+        margin-top: auto;
+        color: var(--moss);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .card a:hover {
+        color: var(--terra);
+      }
+      .legacy {
+        border-top: 1px solid var(--line);
+        padding: 70px 0;
+      }
+      .legacy h2 {
+        font:
+          600 clamp(2rem, 4vw, 3.3rem)/1.1 "Noto Serif SC",
+          serif;
+        letter-spacing: -0.06em;
+        margin: 10px 0;
+      }
+      .legacy p {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .legacy-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 27px;
+      }
+      .legacy-card {
+        padding: 20px;
+        border: 1px solid var(--line);
+        background: rgba(255, 251, 243, 0.45);
+        min-height: 190px;
+      }
+      .legacy-card:nth-child(2n) {
+        border-radius: 23px 7px 23px 7px;
+      }
+      .legacy-card:nth-child(2n + 1) {
+        border-radius: 7px 23px 7px 23px;
+      }
+      .legacy-card h3 {
+        font-size: 14px;
+        margin: 0 0 7px;
+      }
+      .legacy-card b {
+        font:
+          10px "DM Mono",
+          monospace;
+        color: var(--terra);
+      }
+      .legacy-card p {
+        margin-top: 15px;
+        font-size: 11px;
+      }
+      .foot {
+        padding: 28px 0 45px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font:
+          10px "DM Mono",
+          monospace;
+      }
+      @media (max-width: 850px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .legacy-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 550px) {
+        .shell {
+          width: min(100% - 28px, 1120px);
+        }
+        header {
+          height: 68px;
+        }
+        .hero {
+          padding: 58px 0 45px;
+        }
+        .hero h1 {
+          font-size: 3.2rem;
+        }
+        .grid,
+        .legacy-grid {
+          grid-template-columns: 1fr;
+        }
+        .foot {
+          display: block;
+        }
+        .foot span + span {
+          display: block;
+          margin-top: 8px;
+        }
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a class="brand" href="index.html"><i></i>SHAO.KX / PORTFOLIO</a
+        ><a class="back" href="index.html">← 返回主页</a
+        ><a
+          class="back"
+          href="https://github.com/kexiang335-ship-it"
+          target="_blank"
+          rel="noopener"
+          >GitHub ↗</a
+        >
+      </header>
+      <main>
+        <section class="hero">
+          <div class="eyebrow">SELECTED WORKS / 2024 — 2026</div>
+          <h1>作品集仓库，<br />从这里深入。</h1>
+          <p>
+            精选近年完成的产品与业务实践，记录项目背景、关键能力、交付结果与可体验入口。
+          </p>
+          <div class="note">LATEST FIRST · PROJECTS / LEARNING / EVIDENCE</div>
+        </section>
+        <section class="grid">
+          <article class="card">
+            <div class="num">01 · LATEST / KNOWLEDGE</div>
+            <h2>中医学习网</h2>
+            <p>
+              资料驱动的学习系统，围绕书籍、章节、来源与视频发现组织长期复习。
+            </p>
+            <div class="tags"><span>知识产品</span><span>来源引用</span></div>
+            <a href="project-detail.html#tcm">查看项目详情 →</a>
+          </article>
+          <article class="card">
+            <div class="num">02 · LATEST / MINI PROGRAM</div>
+            <h2>小鱼小邵</h2>
+            <p>原生微信情侣小程序，持续打磨状态同步、日历、相册和分享体验。</p>
+            <div class="tags"><span>微信原生</span><span>Cloud</span></div>
+            <a href="project-detail.html#couple">查看项目详情 →</a>
+          </article>
+          <article class="card">
+            <div class="num">03 · LATEST / DESKTOP</div>
+            <h2>RuiVision 电商工作台</h2>
+            <p>从参考图库、提示词到主图/详情图隔离的桌面端创作工作台。</p>
+            <div class="tags"><span>Electron</span><span>工作流</span></div>
+            <a href="project-detail.html#ruivision">查看项目详情 →</a>
+          </article>
+          <article class="card">
+            <div class="num">04 · LATEST / EXTENSION</div>
+            <h2>1688 选品插件</h2>
+            <p>浏览器采集与桌面工作台协作，统一检索、字段和素材回传。</p>
+            <div class="tags"><span>浏览器扩展</span><span>采集</span></div>
+            <a href="project-detail.html#plugin">查看项目详情 →</a>
+          </article>
+          <article class="card">
+            <div class="num">05 · LATEST / 3D WEB</div>
+            <h2>红木 3D 网站</h2>
+            <p>
+              围绕材质、空间和交互展示的产品网站，探索 AI 辅助设计到线上呈现。
+            </p>
+            <div class="tags"><span>3D 视觉</span><span>产品叙事</span></div>
+            <a href="project-detail.html#redwood">查看项目详情 →</a>
+          </article>
+          <article class="card">
+            <div class="num">06 · AI / TRADE</div>
+            <img
+              class="card-shot"
+              src="assets/project-shots/ai-trading.png"
+              alt="AI 外贸谈判与报价系统界面截图"
+              loading="lazy"
+            />
+            <h2>AI 外贸谈判与报价系统</h2>
+            <p>
+              多市场谈判模拟与多币种报价，验证 AI 对真实业务决策的辅助能力。
+            </p>
+            <div class="tags"><span>AI 产品</span><span>本地演示</span></div>
+            <a href="aitrading.html">打开原项目 →</a>
+          </article>
+          <article class="card">
+            <div class="num">07 · AUTOMATION / RPA</div>
+            <img
+              class="card-shot"
+              src="assets/project-shots/rpa-tool.png"
+              alt="跨境电商流程重构 RPA 界面截图"
+              loading="lazy"
+            />
+            <h2>跨境电商流程重构</h2>
+            <p>Python 与 RPA 重新编排采集、清洗、素材整理和上架链路。</p>
+            <div class="tags"><span>Python</span><span>RPA</span></div>
+            <a href="rpa-tool.html">打开原项目 →</a>
+          </article>
+          <article class="card">
+            <div class="num">08 · KNOWLEDGE / MEDICAL</div>
+            <img
+              class="card-shot"
+              src="assets/project-shots/pet-med.png"
+              alt="数字宠物医疗知识库界面截图"
+              loading="lazy"
+            />
+            <h2>数字宠物医疗知识库</h2>
+            <p>把动物医学学习内容结构化，定位为学习辅助而非诊断替代。</p>
+            <div class="tags"><span>动物医学</span><span>教育用途</span></div>
+            <a href="pet-med.html">打开原项目 →</a>
+          </article>
+          <article class="card">
+            <div class="num">09 · TEAM / CONTENT</div>
+            <h2>瑞雨山科技 · 抖音团队作品</h2>
+            <p>团队内容运营与短视频协作成果入口。</p>
+            <div class="tags"><span>团队作品</span><span>抖音</span></div>
+            <a
+              href="https://www.douyin.com/follow"
+              target="_blank"
+              rel="noopener"
+              >打开抖音 →</a
+            >
+          </article>
+        </section>
+      </main>
+      <section class="legacy">
+        <div class="eyebrow">LEGACY / EXPERIENCE</div>
+        <h2>简历里的项目经历卡片</h2>
+        <p>项目经历与业务结果速览。</p>
+        <div class="legacy-grid">
+          <article class="legacy-card">
+            <h3>美团校园送项目</h3>
+            <b>幕府校区负责人</b>
+            <p>统筹建立标准化体系，实现单量突破与稳定运营。</p>
+          </article>
+          <article class="legacy-card">
+            <h3>小红书转化项目</h3>
+            <b>获客转化负责人</b>
+            <p>
+              管理矩阵账号获取1000条线索，达成6万元成交额；2026年3月新成交12万元订单。
+            </p>
+          </article>
+          <article class="legacy-card">
+            <h3>跨境电商优化</h3>
+            <b>AI自动化应用</b>
+            <p>重构商品上架流程，将4人工作量压缩至1人4小时。</p>
+          </article>
+          <article class="legacy-card">
+            <h3>宠物医药推广</h3>
+            <b>渠道维护</b>
+            <p>对接周边宠物医院，协助整理信息并完成推广活动。</p>
+          </article>
+        </div>
+      </section>
+      <footer class="foot">
+        <span>SHAO.KX / SELECTED WORKS</span
+        ><span>PROJECTS · LEARNING · EVIDENCE</span>
+      </footer>
+    </div>
+  </body>
+</html>
